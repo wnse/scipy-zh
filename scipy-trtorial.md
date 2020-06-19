@@ -1,6 +1,8 @@
-# Introduction
+# Scipy Trtorial
 
-*开篇介绍没有翻译*
+## Introduction
+
+_开篇介绍没有翻译_
 
 为了简洁方便，通常以下面的方式导入主要的包，读者将会看到这些简写贯穿了NumPy和SciPy源码，虽然并不要求但是强烈建议读者也使用这些简写方式。
 
@@ -10,29 +12,27 @@
 >>> import matplotlib.pyplot as plt
 ```
 
-
-
-## SciPy Organization
+### SciPy Organization
 
 SciPy根据不同类型的科学计算分为子包，如下表。
 
-| 子包        | 描述                   |
-| ----------- | ---------------------- |
-| cluster     | 聚类算法               |
-| contants    | 物理和数学常数         |
-| fftpack     | 快速傅利叶变换例程     |
-| integrate   | 积分和常微分方程求解器 |
-| interpolate | 插值和平滑样条         |
-| io          | 输入和输出             |
-| linalg      | 线性代数               |
-| ndimage     | N-维图像处理           |
-| odr         | 正交距离回归           |
-| optimize    | 优化和寻根例程         |
-| signal      | 信号处理               |
-| sparse      | 稀疏矩阵和相关例程     |
-| spatial     | 空间数据结构和算法     |
-| special     | 特殊函数               |
-| stats       | 分布统计和函数         |
+| 子包 | 描述 |
+| :--- | :--- |
+| cluster | 聚类算法 |
+| contants | 物理和数学常数 |
+| fftpack | 快速傅利叶变换例程 |
+| integrate | 积分和常微分方程求解器 |
+| interpolate | 插值和平滑样条 |
+| io | 输入和输出 |
+| linalg | 线性代数 |
+| ndimage | N-维图像处理 |
+| odr | 正交距离回归 |
+| optimize | 优化和寻根例程 |
+| signal | 信号处理 |
+| sparse | 稀疏矩阵和相关例程 |
+| spatial | 空间数据结构和算法 |
+| special | 特殊函数 |
+| stats | 分布统计和函数 |
 
 SciPy子包需要分别导入，比如
 
@@ -42,15 +42,15 @@ SciPy子包需要分别导入，比如
 
 由于一些子包的函数使用频繁，这些在scipy命名空间是可用的，交互式会话和程序使用起来更方便。另外一些numpy中基本的数列函数在scipy的一级包中也是可用的。在查找子包之前可以先看一看这些常用函数。
 
-## Finding Documentation
+### Finding Documentation
 
 SciPy和NumPy有各版本的[文档](https://docs.scipy.org/)，包含HTML和PDF两种格式，其中涵盖了几乎所有的函数。然而这个文档仍然编写中，一些部分可能不完整或者不免疏忽。由志愿者组织，依赖于社区成长，所以欢迎任何人的参与，不论是提供反馈或者完善文档或者代码。
 
-Python的文档字符串在SciPy的线上文档中适用。两种方法获取帮助信息。一是Python中的pydoc模块的help命令，不加参数进入帮助交互对话（即```>>>help```）模式允许搜索Python中所有可用的关键字和模块。二是运行以对象为参数的命令*help(obj)*会显示该对象的调用签名和文档字符串。
+Python的文档字符串在SciPy的线上文档中适用。两种方法获取帮助信息。一是Python中的pydoc模块的help命令，不加参数进入帮助交互对话（即`>>>help`）模式允许搜索Python中所有可用的关键字和模块。二是运行以对象为参数的命令_help\(obj\)_会显示该对象的调用签名和文档字符串。
 
-使用pydoc方法调用```help```比较复杂但是以页面形式展示文本。有时会干扰终端上正在运行交互对话。使用```numpy.info```也可以调用numpy/scipy特定的帮助系统。传给```help```命令的对象签名和文档字符串会打印到标准输出（或者是第三个参数传入的可写对象）。```numpy.info```第二个关键字参数定义了打印输出行的最大宽度。如果一个模块作为参数传给```help```，这个模块定义的函数和类的列表会同时输出。比如：
+使用pydoc方法调用`help`比较复杂但是以页面形式展示文本。有时会干扰终端上正在运行交互对话。使用`numpy.info`也可以调用numpy/scipy特定的帮助系统。传给`help`命令的对象签名和文档字符串会打印到标准输出（或者是第三个参数传入的可写对象）。`numpy.info`第二个关键字参数定义了打印输出行的最大宽度。如果一个模块作为参数传给`help`，这个模块定义的函数和类的列表会同时输出。比如：
 
-```
+```text
 >>> np.info(optimize.fmin)
 fmin(func, x0, args=(), xtol=0.0001, ftol=0.0001, maxiter=None, maxfun=None,
       full_output=0, disp=1, retall=0, callback=None)
@@ -108,18 +108,16 @@ Uses a Nelder-Mead simplex algorithm to find the minimum of function of
 one or more variables.
 ```
 
-另外一个很有用的命令是```dir()```，可以用来查找模块或者包中的命名空间，比如：
+另外一个很有用的命令是`dir()`，可以用来查找模块或者包中的命名空间，比如：
 
-```
+```text
 >>> dir(optimize)
 ['BFGS', 'Bounds', 'HessianUpdateStrategy', 'LbfgsInvHessProduct', 'LinearConstraint', 'NonlinearConstraint', 'OptimizeResult', 'OptimizeWarning', 'RootResults', 'SR1', '__all__', '__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '__name__', '__package__', '__path__', '__spec__', '_basinhopping', '_bglu_dense', '_cobyla', '_constraints', '_differentiable_functions', '_differentialevolution', '_dual_annealing', '_group_columns', '_hessian_update_strategy', '_lbfgsb', '_linprog', '_linprog_ip', '_linprog_rs', '_linprog_simplex', '_linprog_util', '_lsap', '_lsap_module', '_lsq', '_minimize', '_minpack', '_nnls', '_numdiff', '_remove_redundancy', '_root', '_root_scalar', '_shgo', '_shgo_lib', '_slsqp', '_spectral', '_trlib', '_trustregion', '_trustregion_constr', '_trustregion_dogleg', '_trustregion_exact', '_trustregion_krylov', '_trustregion_ncg', '_zeros', 'absolute_import', 'anderson', 'approx_fprime', 'basinhopping', 'bisect', 'bracket', 'brent', 'brenth', 'brentq', 'broyden1', 'broyden2', 'brute', 'check_grad', 'cobyla', 'curve_fit', 'diagbroyden', 'differential_evolution', 'division', 'dual_annealing', 'excitingmixing', 'fixed_point', 'fmin', 'fmin_bfgs', 'fmin_cg', 'fmin_cobyla', 'fmin_l_bfgs_b', 'fmin_ncg', 'fmin_powell', 'fmin_slsqp', 'fmin_tnc', 'fminbound', 'fsolve', 'golden', 'lbfgsb', 'least_squares', 'leastsq', 'line_search', 'linear_sum_assignment', 'linearmixing', 'linesearch', 'linprog', 'linprog_verbose_callback', 'lsq_linear', 'minimize', 'minimize_scalar', 'minpack', 'minpack2', 'moduleTNC', 'newton', 'newton_krylov', 'nnls', 'nonlin', 'optimize', 'print_function', 'ridder', 'root', 'root_scalar', 'rosen', 'rosen_der', 'rosen_hess', 'rosen_hess_prod', 'shgo', 'show_options', 'slsqp', 'test', 'tnc', 'toms748', 'zeros']
 ```
 
+## Basic functions
 
-
-# Basic functions
-
-## Interaction with Numpy
+### Interaction with Numpy
 
 SciPy建立在NumPy之上，对于所有基本的数列处理需求，您可以使用NumPy函数。
 
@@ -128,7 +126,7 @@ SciPy建立在NumPy之上，对于所有基本的数列处理需求，您可以�
 >>> np.some_function()
 ```
 
-本手册不会给出每个函数的详细描述（这些可以使用NumPy参考指南或者使用```help```，```info```和```source```命令），而会讨论一些更有用的命令，同时需要介绍他们完全的潜能。
+本手册不会给出每个函数的详细描述（这些可以使用NumPy参考指南或者使用`help`，`info`和`source`命令），而会讨论一些更有用的命令，同时需要介绍他们完全的潜能。
 
 为了使用一些SciPy模块的函数，可以这样操作：
 
@@ -139,7 +137,7 @@ SciPy建立在NumPy之上，对于所有基本的数列处理需求，您可以�
 
 scipy的一级包中也包含了来自numpy和numpy.lib.scimath的函数。即使如此，最好直接使用numpy调用他们。
 
-### index tricks
+#### index tricks
 
 有些类实例为极少用到的特殊的函数提供了高效的创建数列的方式。这一部分会讨论numpy.mgrid，numpy.ogrid，numpy.r_和numpy.c\_快速创建数列的操作。
 
@@ -149,7 +147,7 @@ scipy的一级包中也包含了来自numpy和numpy.lib.scimath的函数。即�
 >>> a = np.concatenate(([3], [0]*5, np.arange(-1, 1.002, 2/9.0)))
 ```
 
-可以像这样使用r_命令：
+可以像这样使用r\_命令：
 
 ```python
 >>> a = np.r_[3, [0]*5, -1:1:10j]
@@ -195,7 +193,7 @@ array([[[0.        , 0.        , 0.        , 0.        ],
        [[0.        , 1.66666667, 3.33333333, 5.        ],
         [0.        , 1.66666667, 3.33333333, 5.        ],
         [0.        , 1.66666667, 3.33333333, 5.        ],
-        [0.        , 1.66666667, 3.33333333, 5.        ]]])            
+        [0.        , 1.66666667, 3.33333333, 5.        ]]])
 ```
 
 拥有这样的网格数列有时非常有用。然而由于NumPy和SciPy的广播规则，并不是经常需要构造N维的网格数列。如果这是生成网格的唯一目的，则应改用ogrid函数，该函数会使用newaxis明智地生成“开放”网格，以创建N，N维数列，其中每个数列中只有一维的长度大于1。如果网格的唯一目的是生成用于评估N维函数的采样点，这将节省内存并创建相同的结果。
@@ -208,11 +206,11 @@ array([[[0.        , 0.        , 0.        , 0.        ],
        [5.        ]]), array([[0.        , 1.66666667, 3.33333333, 5.        ]])]
 ```
 
-### Shape manipulation
+#### Shape manipulation
 
 在此类函数中，包括用于从N维数列中挤出一维长度的程序，以确保数组至少为一维，二维或3维，并按行，列和“页面”（在第三维中）堆叠（连接）数列。也提供用于拆分数列的例程（与堆叠数列大致相反）。
 
-### Polynomials
+#### Polynomials
 
 SciPy中有两种方式（可替换）处理1维的多项式。第一种是使用NumPy中的poly1d类。该类接受系数或多项式根来初始化多项式，然后多项式对象可以在代数表达式中操作，积分，微分和计算，甚至像多项式一样输出。
 
@@ -236,9 +234,9 @@ array([ 69, 100])
 
 处理多项式的另一种方法是作为一个系数数列，其中数列的第一个元素给出了最大幂系数。 有对系数序列的多项式的加，减，乘，除，积分，微分和计算的显式函数。
 
-### Vectorizing functions (vectorize)
+#### Vectorizing functions \(vectorize\)
 
-NumPy提供的一个特性是类vectorize，它接受标量返回标量，将普通的Python函数转换为一个“矢量化函数”，其广播规则与其他NumPy函数（即通用函数或ufuncs）相同。例如，假设有一个名为```addsubtract```的Python函数定义为：
+NumPy提供的一个特性是类vectorize，它接受标量返回标量，将普通的Python函数转换为一个“矢量化函数”，其广播规则与其他NumPy函数（即通用函数或ufuncs）相同。例如，假设有一个名为`addsubtract`的Python函数定义为：
 
 ```python
 >>> def addsubtract(a, b):
@@ -262,19 +260,19 @@ NumPy提供的一个特性是类vectorize，它接受标量返回标量，将普
 array([1, 6, 1, 2])
 ```
 
-这个函数完全可以以向量方式定义，而不用向量化。然而，采用优化或集成例程的函数可能只能使用```vectorize```进行向量化。
+这个函数完全可以以向量方式定义，而不用向量化。然而，采用优化或集成例程的函数可能只能使用`vectorize`进行向量化。
 
-### Type handling
+#### Type handling
 
 请读者注意[numpy.iscomplex](https://docs.scipy.org/doc/numpy/reference/generated/numpy.iscomplex.html#numpy.iscomplex)/[numpy.isreal](https://numpy.org/doc/stable/reference/generated/numpy.isreal.html#numpy.isreal)和[numpy.iscomplexobj](https://docs.scipy.org/doc/numpy/reference/generated/numpy.iscomplexobj.html#numpy.iscomplexobj)/[numpy.isrealobj](https://docs.scipy.org/doc/numpy/reference/generated/numpy.isrealobj.html#numpy.isrealobj)的区别。前者是基于数列的，返回一个由1和0组成的数列，代表每个元素的测试结果，后者是基于对象的，返回标量描述测试整个对象的结果。
 
-经常需要获取复数的实部和/或虚部，虽然复数和数列具有返回这些值的属性，但是如果不清楚对象是不是复数，最好使用numpy.real和numpy.imag函数形式。这些函数可以在任何可以转换成NumPy数列的类型上执行。将含有一个极小的虚部的复数转换为实数时，可以考虑numpy.real_if_close函数。
+经常需要获取复数的实部和/或虚部，虽然复数和数列具有返回这些值的属性，但是如果不清楚对象是不是复数，最好使用numpy.real和numpy.imag函数形式。这些函数可以在任何可以转换成NumPy数列的类型上执行。将含有一个极小的虚部的复数转换为实数时，可以考虑numpy.real\_if\_close函数。
 
 有时编码时需要检查一个数字是不是标量（Python（长）整型， Python浮点型，Python复数或者rank-0数列）。numpy.isscalar函数提供该功能，返回值为0或1。
 
-### Other useful functions
+#### Other useful functions
 
-还应该提到其他一些有用的功能。对于进行相位处理，angle和unwrap函数非常有用。此外，linspace和logspace函数以线性或对数刻度返回等距的样本。最后，了解NumPy的索引编制功能很有用。应该提到函数select，它扩展了where在多个条件和多个选择时功能。调用约定为```select(condlist, choicelist, default = 0)```。 numpy.select是多个if语句的向量形式。它允许快速构造一个函数，该函数根据条件列表返回结果数列。返回数列的每个元素均取自choicelist，对应于condlist中为真的第一个条件。比如：
+还应该提到其他一些有用的功能。对于进行相位处理，angle和unwrap函数非常有用。此外，linspace和logspace函数以线性或对数刻度返回等距的样本。最后，了解NumPy的索引编制功能很有用。应该提到函数select，它扩展了where在多个条件和多个选择时功能。调用约定为`select(condlist, choicelist, default = 0)`。 numpy.select是多个if语句的向量形式。它允许快速构造一个函数，该函数根据条件列表返回结果数列。返回数列的每个元素均取自choicelist，对应于condlist中为真的第一个条件。比如：
 
 ```python
 >>> x = np.arange(10)
@@ -284,28 +282,28 @@ array([1, 6, 1, 2])
 array([ 0,  1,  2,  0,  0,  0, 36, 49, 64, 81])
 ```
 
-另外一些有用的函数也可以在scipy.special模块中找到，比如factorial和comb函数使用精确的整数算术（由于Python的Long整数对象） $n!$和$n!/k!(n-k)!$  ，或者使用浮点精度的gamma函数计算。
+另外一些有用的函数也可以在scipy.special模块中找到，比如factorial和comb函数使用精确的整数算术（由于Python的Long整数对象） $n!$和$n!/k!\(n-k\)!$ ，或者使用浮点精度的gamma函数计算。
 
-*以下这段不懂*
+_以下这段不懂_
 
-其他有用的函数可以在scipy.misc中找到。比如两个函数可用于使用离散差来求函数的近似导数。函数central_diff_weights返回等距N点近似o阶导数的加权系数。这些权重必须乘以与这些点相对应的函数，然后将结果相加以获得导数近似值。仅当该函数的样本可用时，才应使用此函数。当函数是可以传递给例程并进行估计的对象时，可以使用函数derivative在正确的点处自动评估该对象，以获得给定点处第o阶导数的N点近似值。
+其他有用的函数可以在scipy.misc中找到。比如两个函数可用于使用离散差来求函数的近似导数。函数central\_diff\_weights返回等距N点近似o阶导数的加权系数。这些权重必须乘以与这些点相对应的函数，然后将结果相加以获得导数近似值。仅当该函数的样本可用时，才应使用此函数。当函数是可以传递给例程并进行估计的对象时，可以使用函数derivative在正确的点处自动评估该对象，以获得给定点处第o阶导数的N点近似值。
 
-# Statistics (scipy.stats)
+## Statistics \(scipy.stats\)
 
-## Introduction
+### Introduction
 
-本章中，我们讨论了许多，但肯定不是所有的```scipy.stats```的功能。此处的目的是向用户提供此软件包的实用知识。有关更多详细信息，请参阅[参考手册](https://docs.scipy.org/doc/scipy/reference/stats.html#statsrefmanual)
+本章中，我们讨论了许多，但肯定不是所有的`scipy.stats`的功能。此处的目的是向用户提供此软件包的实用知识。有关更多详细信息，请参阅[参考手册](https://docs.scipy.org/doc/scipy/reference/stats.html#statsrefmanual)
 
 注意，以下文档还在进行中：
 
-- Discrete Statistical Distributions
-- Continuous Statistical Distributions
+* Discrete Statistical Distributions
+* Continuous Statistical Distributions
 
-## Random variables
+### Random variables
 
 有两种典型的分布类型，连续型随机变量和离散型随机变量。这些类中有超过80种连续型随机变量（Random Variables, RVs）和10种离散型随机变量，除此之外，用户可以很容易增加新的例程和分布。
 
-所有的统计函数位于子包scipy.stats中，使用```info(stats)```命令可以得到相当完整的函数列表。可用的随机变量列表也可以通过stats子包的文档字符串获得。
+所有的统计函数位于子包scipy.stats中，使用`info(stats)`命令可以得到相当完整的函数列表。可用的随机变量列表也可以通过stats子包的文档字符串获得。
 
 以下主要讨论连续型RVs，几乎全部也都可以应用于离散型，同时列出一些差异（Specific points for discrete distributions）。
 
@@ -327,9 +325,9 @@ array([ 0,  1,  2,  0,  0,  0, 36, 49, 64, 81])
 >>> from __future__ import print_function
 ```
 
-### Getting help
+#### Getting help
 
-首先，所有的分布都有帮助功能。为了获取一些基本信息，打印相关的文档字符串：```print(stats.norm.__doc__)```。
+首先，所有的分布都有帮助功能。为了获取一些基本信息，打印相关的文档字符串：`print(stats.norm.__doc__)`。
 
 为了获取帮助，比如，分布最高和最低限，调用：
 
@@ -338,9 +336,9 @@ array([ 0,  1,  2,  0,  0,  0, 36, 49, 64, 81])
 bounds of distribution lower: -inf, upper: inf
 ```
 
-可以使用```dir(norm)```列出分布的所有方法和性质。有些方法是私有的，虽然没有如此命名（名称没有以下划线起始），比如```veccdf```，只对内部计算可用。
+可以使用`dir(norm)`列出分布的所有方法和性质。有些方法是私有的，虽然没有如此命名（名称没有以下划线起始），比如`veccdf`，只对内部计算可用。
 
-为获取真正的主方法，我们列出冻结分布的方法。（以下会解释何为*冻结*分布）
+为获取真正的主方法，我们列出冻结分布的方法。（以下会解释何为_冻结_分布）
 
 ```python
 >>> rv = norm()
@@ -359,18 +357,18 @@ number of continuous distributions: 100
 number of discrete distributions:   15
 ```
 
-### Common methods
+#### Common methods
 
 连续型随机变量主要公共方法有：
 
-- rvs：随机变量（Random Variates）
-- pdf：概率密度函数（Probability Density Function）
-- cdf：累积分布函数（Cumulative Distribution Function）
-- sf：生存函数（Survival Function (1-CDF)）
-- ppf：百分点函数（累积分布反函数）（Percent Point Function (Inverse of CDF)）
-- isf：生存反函数（Inverse Survival Function (Inverse of SF)）
-- stats：返回平均值，方差，Fisher偏度，Fisher峰度（mean, variance, (Fisher’s) skew, or (Fisher’s) kurtosis）
-- moment：分布的非中心矩（non-central moments of the distribution）
+* rvs：随机变量（Random Variates）
+* pdf：概率密度函数（Probability Density Function）
+* cdf：累积分布函数（Cumulative Distribution Function）
+* sf：生存函数（Survival Function \(1-CDF\)）
+* ppf：百分点函数（累积分布反函数）（Percent Point Function \(Inverse of CDF\)）
+* isf：生存反函数（Inverse Survival Function \(Inverse of SF\)）
+* stats：返回平均值，方差，Fisher偏度，Fisher峰度（mean, variance, \(Fisher’s\) skew, or \(Fisher’s\) kurtosis）
+* moment：分布的非中心矩（non-central moments of the distribution）
 
 让我们利用正态随机变量作为一个例子。
 
@@ -379,7 +377,7 @@ number of discrete distributions:   15
 0.5
 ```
 
-传入numpy数列可以计算每个点的数值的```cdf```：
+传入numpy数列可以计算每个点的数值的`cdf`：
 
 ```python
 >>> norm.cdf([-1., 0, 1])
@@ -389,7 +387,7 @@ array([0.15865525, 0.5       , 0.84134475])
 array([0.15865525, 0.5       , 0.84134475])
 ```
 
-所以，基本的方法，比如*pdf*， *cdf*等等，都是向量化的。
+所以，基本的方法，比如_pdf_， _cdf_等等，都是向量化的。
 
 其他一般用到的方法也是如此：
 
@@ -400,14 +398,14 @@ array([0.15865525, 0.5       , 0.84134475])
 (array(0.), array(1.))
 ```
 
-使用百分点函数```ppf```可以计算分布的中位数，这也是```cdf```的反函数：
+使用百分点函数`ppf`可以计算分布的中位数，这也是`cdf`的反函数：
 
 ```python
 >>> norm.ppf(0.5)
 0.0
 ```
 
-使用```size```关键字可以生成随机变量序列：
+使用`size`关键字可以生成随机变量序列：
 
 ```python
 >>> norm.rvs(size=3)
@@ -420,23 +418,22 @@ array([-1.68701029, -0.16442867,  1.07258167])    #random
 >>> np.random.seed(1234)
 ```
 
-虽然如此，不建议依赖全局的状态。一个更好的方法是使用*random_state*参数，它接受[numpy.random.mtrand.RandomState](https://docs.scipy.org/doc/numpy/reference/random/legacy.html#numpy.random.mtrand.RandomState)类的实例，或者一个整数，用来作为内部```RandomState```对象的种子：
+虽然如此，不建议依赖全局的状态。一个更好的方法是使用_random\_state_参数，它接受[numpy.random.mtrand.RandomState](https://docs.scipy.org/doc/numpy/reference/random/legacy.html#numpy.random.mtrand.RandomState)类的实例，或者一个整数，用来作为内部`RandomState`对象的种子：
 
 ```python
 >>> norm.rvs(size=5, random_state=1234)
 array([ 0.47143516, -1.19097569,  1.43270697, -0.3126519 , -0.72058873])
 ```
 
-```norm.rev(5)```不会生成5个变量：
-
+```text
 ```python
 >>> norm.rvs(5)
 5.471435163732493
 ```
 
-这里没有关键字的```5```解释为首个可能的关键字参数```loc```，这是所有连续分布都具有的一对关键字变量的第一个。是下一节的主题。
+这里没有关键字的`5`解释为首个可能的关键字参数`loc`，这是所有连续分布都具有的一对关键字变量的第一个。是下一节的主题。
 
-### Shifting and scaling
+#### Shifting and scaling
 
 所有连续分布接受`loc`和`scale`作为关键字参数来调整分布的位置和范围，例如，对于标准正态分布，位置是平均值，范围是标准差。
 
@@ -445,12 +442,14 @@ array([ 0.47143516, -1.19097569,  1.43270697, -0.3126519 , -0.72058873])
 (array(3.), array(16.))
 ```
 
-很多情况下，随机变量`X`分布可以通过$(X-loc)/scale$ 进行标准化。默认值$loc=0$，$scale=1$。
+很多情况下，随机变量`X`分布可以通过$\(X-loc\)/scale$ 进行标准化。默认值$loc=0$，$scale=1$。
 
 使用好`loc`和`scale`参数可以将标准分布修改为很多种形式。为了深入的介绍数据缩放，给出一个平均值为$1/\lambda$的几何分布随机变量
+
 $$
 F(x)=1-exp(-\lambda x)
 $$
+
 通过使用所述缩放规则，使`scale = 1./lambda`可以看到得到了合适的范围。
 
 ```python
@@ -461,7 +460,7 @@ $$
 
 > 注意：
 >
-> 采用形状参数的分布想达到需要的形式，需要的可能不止是`loc`和`scale`。比如，给定长度为R的特定2维向量的长度受到每个组分独立$N(0, /\sigma^2)$偏差影响的分布是$rice(R/\sigma, scale=\sigma)$， 第一个形状参数需要与$x$一起缩放。 
+> 采用形状参数的分布想达到需要的形式，需要的可能不止是`loc`和`scale`。比如，给定长度为R的特定2维向量的长度受到每个组分独立$N\(0, /\sigma^2\)$偏差影响的分布是$rice\(R/\sigma, scale=\sigma\)$， 第一个形状参数需要与$x$一起缩放。
 
 均匀分布也很有趣：
 
@@ -482,12 +481,14 @@ array([0.  , 0.  , 0.25, 0.5 , 0.75, 1.
 
 建议通过关键字明确的设定`loc`和`scale`参数，当对随机变量使用冻结分布调用多个方法里，可以减少重复次数。
 
-### Shape parameters
+#### Shape parameters
 
 一般的连续随机变量可以通过`loc`和`scale`参数进行改变和缩放，但一些分布需要额外的形状参数。比如，带有密度的伽玛分布
+
 $$
 \gamma(x, a)=\frac{\lambda(\lambda x)^{a-1}}{\Gamma(a)} e^{-\lambda x}
 $$
+
 要求形状参数$a$，可通过将`scale`关键字设定为$1/\lambda$来设置$\lambda$。
 
 来看一下伽玛分布的形状参数的数值和名称（通过上述可知为1）.
@@ -514,9 +515,9 @@ $$
 (array(2.), array(4.))
 ```
 
-### Freezing a distribution
+#### Freezing a distribution
 
-每次都传入`loc`和`scale`参数会很麻烦，*冻结*随机变量的概念就是要解决这种问题。
+每次都传入`loc`和`scale`参数会很麻烦，_冻结_随机变量的概念就是要解决这种问题。
 
 ```python
 >>> rv = gamma(1, scale=2)
@@ -529,7 +530,7 @@ $$
 (2.0, 2.0)
 ```
 
-### Broadcasting
+#### Broadcasting
 
 `pdf`等基本方法满足numpy的通用广播规则。比如，可以计算t分布不同概率和自由度下右尾的临界值。
 
@@ -555,13 +556,13 @@ array([1.36343032, 1.79588482, 2.71807918])
 array([1.37218364, 1.79588482, 2.68099799])
 ```
 
-### Specific points for discrete distributions
+#### Specific points for discrete distributions
 
 离散分布具有大部分与连续分布相同的基本方法。不过，`pdf`被概率质量函数`pmf`取代，没有估计方法可用，比如fit，`scale`也不是一个有效的关键字参数，位置参数，关键字`loc`还是可以用来改变分布。
 
-cdf的计算需要额外注意。在连续分布中，累积分布函数在大部分情况下区间内(a,b)单调递增，因此有唯一反函数。离散分布的cdf是一个阶梯函数，所以cdf的反函数，即百分点函数需要不同的定义：
+cdf的计算需要额外注意。在连续分布中，累积分布函数在大部分情况下区间内\(a,b\)单调递增，因此有唯一反函数。离散分布的cdf是一个阶梯函数，所以cdf的反函数，即百分点函数需要不同的定义：
 
-```
+```text
 ppf(q) = min{x : cdf(x) >= q, x integer}
 ```
 
@@ -589,16 +590,16 @@ array([0., 2., 4., 6.])
 
 如果使用的值不在cdf阶梯函数的联结处，我们将得到下一个更高的整数。
 
-### Fitting distributions
+#### Fitting distributions
 
 非冻结分布的附加方法与分布的参数估计有关：
 
-- fit: 分布参数的最大似然估计，包括位置和范围
-- fit_loc_scale: 形状参数给定的情况下对位置和范围的估计
-- nnlf: 负对数似然函数
-- expect: 根据pdf或pmf计算函数的期望值
+* fit: 分布参数的最大似然估计，包括位置和范围
+* fit\_loc\_scale: 形状参数给定的情况下对位置和范围的估计
+* nnlf: 负对数似然函数
+* expect: 根据pdf或pmf计算函数的期望值
 
-### Performance issues and cautionary remarks
+#### Performance issues and cautionary remarks
 
 每个方法在速度方面的性能，不同的分布和方法差异很大。两种方式可能得到某方法的结果：或者是精确的计算，或者是通过独立于特定分布的通用算法。
 
@@ -606,18 +607,18 @@ array([0., 2., 4., 6.])
 
 另一方面，通用方法用于分布或者计算公式不明确情况下。定义一个分布只需要pdf或者cdf其中之一； 其他方法可以通过数值积分和根查找推断。然而这些间接的方法会很慢。举例来说，`rgh = stats.gausshyper.rvs(0.5, 2, 2, 2, size=100)`间接的创建100个随机变量，大约花费了19秒的时间，然而100万个标准正态分布或者t分布的随机变量只需要大约1秒钟。
 
-### Remaining issues
+#### Remaining issues
 
 `scipy.stats`中的分布已经完善了很多，并且有相当多检验包。然而还存在一些问题：
 
-- 这些分布已经在一些参数范围内进行了测试；但是，在一些范围内，可能仍然存在一些不正确的结果。
-- *fit*中的最大似然估计默认启动参数不适用于所有分布，用户需要提供良好的启动参数。此外，对于某些分布，使用最大似然估计量可能不是最佳选择。
+* 这些分布已经在一些参数范围内进行了测试；但是，在一些范围内，可能仍然存在一些不正确的结果。
+* _fit_中的最大似然估计默认启动参数不适用于所有分布，用户需要提供良好的启动参数。此外，对于某些分布，使用最大似然估计量可能不是最佳选择。
 
-## Building specific distributions
+### Building specific distributions
 
 下一个示例展示如何建立自己的分布，更多的示例展示了分布的用法和一些统计检验。
 
-### Making a continuous distribution, i.e., subclassing `rv_continuous`
+#### Making a continuous distribution, i.e., subclassing `rv_continuous`
 
 建立一个连续分布比较简单。
 
@@ -668,21 +669,21 @@ __main__:1: IntegrationWarning: The maximum number of subdivisions (50) has been
 
 这样看起来好多了。产生问题的原因是由于pdf在deterministic分布的类中没有定义的事实。
 
-### Subclassing `rv_discrete`
+#### Subclassing `rv_discrete`
 
 下面我们使用`stats.rv_discrete`生成一个离散分布，该分布具有以整数为中心区间的截断正态概率。
 
 **General info**
 
-来自于rv_discrete的文档字符串，`help(stats.rv_discrete)`
+来自于rv\_discrete的文档字符串，`help(stats.rv_discrete)`
 
-> 通过传递给rv_discrete初始化方法（values=keyword）可以构建任何离散随机变量，使得P{X=xk}=pk，序列元组(xk, pk)描述了X的取值(xk)发生的非零概率(pk)。
+> 通过传递给rv\_discrete初始化方法（values=keyword）可以构建任何离散随机变量，使得P{X=xk}=pk，序列元组\(xk, pk\)描述了X的取值\(xk\)发生的非零概率\(pk\)。
 
 在这之后，有完成该工作更多的要求：
 
-- 关键字*name*必需
-- 分布中的点xk必须是整数
-- 需要指定有效位数（小数）
+* 关键字_name_必需
+* 分布中的点xk必须是整数
+* 需要指定有效位数（小数）
 
 如果后面两个条件不满足，会引发异常或结果不正确。
 
@@ -757,7 +758,7 @@ mean = -0.0000, variance = 6.3302, skew = 0.0000, kurtosis = -0.0076
 
 ![](https://docs.scipy.org/doc/scipy/reference/_images/normdiscr_plot1.png)
 
-![../_images/normdiscr_plot2.png](https://docs.scipy.org/doc/scipy/reference/_images/normdiscr_plot2.png)
+![../\_images/normdiscr\_plot2.png](https://docs.scipy.org/doc/scipy/reference/_images/normdiscr_plot2.png)
 
 接下来，测试样本是否由norm-discrete分布产生。这也可以通过随机数字是否正常来验证。
 
@@ -776,7 +777,7 @@ chisquare for normdiscrete: chi2 = 12.466 pvalue = 0.4090
 
 本例中p值很高，所以我们可以比较确信随机样本由分布产生。
 
-## Analysing one sample
+### Analysing one sample
 
 首先创建一些随机变量。设定种子使得每次运行可以得到相同的结果。作为例子，由Student t分布中取一个样本：
 
@@ -785,11 +786,11 @@ chisquare for normdiscrete: chi2 = 12.466 pvalue = 0.4090
 >>> x = stats.t.rvs(10, size=1000)
 ```
 
-这里设置了t分布需要的形状参数自由度为10。size=1000表示样本包含1000个独立绘制的（伪）随机数字。由于没有明确指定，关键字参数*loc*和*scale*为默认的0和1。
+这里设置了t分布需要的形状参数自由度为10。size=1000表示样本包含1000个独立绘制的（伪）随机数字。由于没有明确指定，关键字参数_loc_和_scale_为默认的0和1。
 
-### Descriptive statistics
+#### Descriptive statistics
 
-*x*是numpy数列，可以直接访问所有的数列方法，即：
+_x_是numpy数列，可以直接访问所有的数列方法，即：
 
 ```python
 >>> print(x.min())      #  与np.min(x)相同
@@ -821,7 +822,7 @@ sample:        mean = 0.0141, variance = 1.2903, skew = 0.2165, kurtosis = 1.055
 
 这个样本的统计值 与理论值相比有微量的差别。
 
-### T-test and KS-test
+#### T-test and KS-test
 
 可以使用t检验来检验样本与理论的平均值是否有统计的显著差异。
 
@@ -841,7 +842,7 @@ p值是0.7，这意味着在指定的alpha错误下，比如10%，不能拒绝�
 t-statistic =  0.391 pvalue = 0.6955
 ```
 
-Kolmogorov-Smirnov(K-S)检验用来检验样本来源于标准t分布的假设
+Kolmogorov-Smirnov\(K-S\)检验用来检验样本来源于标准t分布的假设
 
 ```python
 >>> print('KS-statistic D = %6.3f pvalue = %6.4f' % stats.kstest(x, 't', (10,)))
@@ -865,7 +866,7 @@ KS-statistic D =  0.032 pvalue = 0.2402
 
 注意：Kolmogorov-Smirnov检验假设针对给定参数的分布进行检验，因此最后，平均值和方差的估计违反了该假设，分布的检验统计和基于此得到的检验p值也是不正确的。
 
-### Tails of the distribution
+#### Tails of the distribution
 
 最后，可以检查分布的右尾。使用百分点函数ppf得到临界值，这是cdf的反函数，或者更直接的使用生存函数的反函数。
 
@@ -939,7 +940,7 @@ chisquare for normal: chi2 =  11.08 pvalue = 0.0858
 
 考虑了估计的参数，仍然拒绝样本来自于正态分布的假设（5%水平），但是，不能拒绝t分布，因为p值是0.95。
 
-### Special tests for normal distributions
+#### Special tests for normal distributions
 
 由于正态分布是统计中最常见的分布，有一些额外的函数可以进行检验一个样本是否来自于正态分布。
 
@@ -983,11 +984,11 @@ normaltest teststat =  0.613 pvalue = 0.7361
 
 当检验t分布的小样本或正态分布的大样本的正态性时，都不能拒绝原假设，样本来源于正态分布总体。第一个例子中，是因为小样本情况下检验没有能力区分t分布和正态分布的随机变量。
 
-## Comparing two samples
+### Comparing two samples
 
 以下给出两个样本，可以来自相同或者不同的分布，检验两个样本是否有相同的统计值。
 
-### Comparing means
+#### Comparing means
 
 检验具有相同平均值的样本：
 
@@ -1006,7 +1007,7 @@ Ttest_indResult(statistic=-0.40108918347419803, pvalue=0.6884403219876052)
 Ttest_indResult(statistic=-4.296151964438256, pvalue=1.9078085541582206e-05)
 ```
 
-### Kolmogorov-Smirnov test for two samples ks_2samp
+#### Kolmogorov-Smirnov test for two samples ks\_2samp
 
 举个例子，两个样本来自相同分布，由于p值比较高，不能拒绝原假设
 
@@ -1022,11 +1023,11 @@ Ks_2sampResult(statistic=0.032, pvalue=0.9603008958861495)
 Ks_2sampResult(statistic=0.128, pvalue=0.0005458774578140435)
 ```
 
-## Kernel density estimation
+### Kernel density estimation
 
-统计中常见的任务是从一组数据样本的随机变量中估计概率密度函数( probability density function, PDF)，这叫做密度估计。最广泛工具是直方图。直方图是可视化很有用的工具（主要是所有人都理解），但是数据利用效率不高。核密度估计(Kernel density estimation, KDE)是解决同样任务更有效的工具。高斯核密度估计(gaussian_kde)可以用来估计单变量或者多变量数据的概率密度函数，如果数据是单峰的话效果更好。
+统计中常见的任务是从一组数据样本的随机变量中估计概率密度函数\( probability density function, PDF\)，这叫做密度估计。最广泛工具是直方图。直方图是可视化很有用的工具（主要是所有人都理解），但是数据利用效率不高。核密度估计\(Kernel density estimation, KDE\)是解决同样任务更有效的工具。高斯核密度估计\(gaussian\_kde\)可以用来估计单变量或者多变量数据的概率密度函数，如果数据是单峰的话效果更好。
 
-### Univariate estimation
+#### Univariate estimation
 
 先用一个小数据来看看高斯核密度估计的用法及bandwidth的不同选项。数据样本的概率密度函数在图中由底部的蓝色"+”表示（rug图）：
 
@@ -1171,11 +1172,11 @@ Text(0, 0.5, 'Density')
 
 ![](https://docs.scipy.org/doc/scipy/reference/_images/kde_plot4.png)
 
-不出所料，由于双峰分布的两个特征的特征尺寸不同，KDE并不像我们想要的那样接近真实的PDF。通过将默认bandwidths减半（Scott * 0.5），我们可以做得更好，不过使用比默认小5倍的bandwidths还不够平滑。但是在这种情况下，我们真正需要的是非均匀（自适应）bandwidths。
+不出所料，由于双峰分布的两个特征的特征尺寸不同，KDE并不像我们想要的那样接近真实的PDF。通过将默认bandwidths减半（Scott \* 0.5），我们可以做得更好，不过使用比默认小5倍的bandwidths还不够平滑。但是在这种情况下，我们真正需要的是非均匀（自适应）bandwidths。
 
-### Multivariate estimation
+#### Multivariate estimation
 
-使用gaussian_kde可以像单变量一样进行多变量估计，下面用两个变量来说明。首先使用一个两个相关变量相关的模型产生一些随机变量。
+使用gaussian\_kde可以像单变量一样进行多变量估计，下面用两个变量来说明。首先使用一个两个相关变量相关的模型产生一些随机变量。
 
 ```python
 >>> def measure(n):
@@ -1221,9 +1222,9 @@ Text(0, 0.5, 'Density')
 
 ![](https://docs.scipy.org/doc/scipy/reference/_images/kde_plot5.png)
 
-### Multiscale Graph Correlation (MGC)
+#### Multiscale Graph Correlation \(MGC\)
 
-使用multiscale_graphcorr可以对高维和非线性的数据做独立检验。在开始前导入一些包：
+使用multiscale\_graphcorr可以对高维和非线性的数据做独立检验。在开始前导入一些包：
 
 ```python
 >>> import numpy as np
@@ -1329,38 +1330,4 @@ P-value:  0.0
 ![](https://docs.scipy.org/doc/scipy/reference/_images/mgc_plot4.png)
 
 从这里可以明显看出，MGC能够再次确定关系，因为p值非常低，并且MGC检验统计量相对较高。 MGC图表示强烈的非线性关系。在这种情况下，最佳比例等于局部比例，在地图上用红色点标记。
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
